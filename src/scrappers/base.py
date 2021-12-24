@@ -1,5 +1,9 @@
+from time import sleep
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 import config
 from utils import PriceInfo, sanitize_string
@@ -17,6 +21,13 @@ def prepare_driver() -> webdriver.Chrome:
 
 
 class BaseScrapper:
+    input_selector = None
+    result_container_selector = None
+    title_selector = None
+    price_selector = None
+    link_selector = None
+    cookies_accept_selector = None
+
     def __init__(self, base_path):
         self.base_path = base_path
         self.driver = prepare_driver()
@@ -24,6 +35,9 @@ class BaseScrapper:
 
     def open_page(self):
         self.driver.get(self.base_path)
+        if self.cookies_accept_selector:
+            sleep(1)
+            self.driver.find_element(*self.cookies_accept_selector).click()
 
     def quit_page(self):
         self.driver.quit()
@@ -37,3 +51,19 @@ class BaseScrapper:
     def search_and_scrap(self, query) -> [PriceInfo]:
         self.search_for_term(query)
         self.scrap_page()
+
+    def search_for_term(self, query):
+        search_input = self.driver.find_element(*self.input_selector)
+        search_input.clear()
+        search_input.send_keys(query + Keys.ENTER)
+        sleep(2)
+
+    def scrap_page(self) -> [PriceInfo]:
+        item_containers = self.driver.find_elements(*self.result_container_selector)
+        for cont in item_containers:
+            title_element = self.driver.find_element(*self.title_selector)
+            link_element = self.driver.find_element(*self.link_selector)
+            name = title_element.text
+            link = link_element.get_attribute('href')
+            price = cont.find_element(*self.price_selector).text
+            self.price_data.append(PriceInfo(name, price, link))

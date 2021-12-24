@@ -7,18 +7,20 @@ markplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaar
 headless = False
 
 brand_models = {
-    'PRS': ('Custom 24', 'Custom 22', '408', 'McCarty'),
+    'PRS': ('Custom 24', 'Custom 22', '408', 'McCarty', '594', 'Paul\'s Guitar'),
     'Fender': ('American Standard', 'American Special', 'Custom Shop', 'Masterbuilt', 'Esquire'),
     'Music Man': ('Luke', 'Cutlass', 'Silhouette', 'Reflex'),
     'Gibson': ('Les Paul Standard',),
     'Tom Anderson': ('Classic', 'Drop Top'),
     'Suhr': ('Classic', 'Modern'),
     'Parker': ('Fly Classic', 'Fly Mojo'),
-    'Mayones': ('Aquila', 'Legend', 'Legend'),
-    'Nik Huber': ('Krautster',),
+    'Mayones': ('Aquila', 'Legend'),
+    'Nik Huber': ('Krautster', 'Orca'),
     'Aristides': ('060',),
-    'Eastman': ('sb59', 'sb57'),
-    'James Tyler': ('Studio Elite',)
+    'Eastman': ('sb59', 'sb57', 'sb55'),
+    'James Tyler': ('Studio Elite',),
+    'Valley Arts': ('Custom', 'California', 'M series'),
+    'Harmony': ('Jupiter', 'Rebel', 'Comet'),
 }
 
 

@@ -36,6 +36,4 @@ class OLXScrapper(BaseScrapper):
                 price = cont.find_element(By.CSS_SELECTOR, 'p.price').text
                 self.price_data.append(PriceInfo(name, price, link))
 
-    def search_and_scrap(self, query) -> [PriceInfo]:
-        self.search_for_term(query)
-        self.scrap_page()
+

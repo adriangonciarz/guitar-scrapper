@@ -11,10 +11,24 @@ class PriceInfo:
     price_string: str
     link: str
 
+    currency_map = {
+        'PLN': ('zł', 'PLN'),
+        'EUR': ('€', 'EUR'),
+        'SEK': ('kr', 'SEK')
+    }
+
     @property
     def price(self) -> Optional[int]:
         price_extracted = ''.join(re.findall('[0-9]+', self.price_string))
         return int(price_extracted) if price_extracted else None
+
+    @property
+    def currency(self):
+        for key, values in self.currency_map.items():
+            for value in values:
+                if value in self.price_string:
+                    return key
+        return 'NA'
 
     @property
     def brand(self):

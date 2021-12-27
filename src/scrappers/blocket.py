@@ -6,9 +6,9 @@ from scrappers.base import BaseScrapper
 
 class BlocketScrapper(BaseScrapper):
     input_selector = (By.CSS_SELECTOR, 'input.react-autosuggest__input')
-    result_container_selector = (By.XPATH, '//div[@data-cy="search-results"]/div')
-    title_selector = (By.XPATH, "//a[contains(@class, 'styled__StyledTitleLink')]")
-    price_selector = (By.XPATH, "//div[contains(@class, 'Price__StyledPrice')]")
+    result_container_selector = (By.XPATH, './/div[@data-cy="search-results"]/div')
+    title_selector = (By.XPATH, ".//a[contains(@class, 'styled__StyledTitleLink')]")
+    price_selector = (By.XPATH, ".//div[contains(@class, 'Price__StyledPrice')]")
     link_selector = title_selector
     cookies_accept_selector = (By.ID, 'accept-ufti')
 

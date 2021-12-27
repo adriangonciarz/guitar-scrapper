@@ -26,14 +26,14 @@ def perform_scrap(scrapper_class):
     for term in search_terms():
         scrapper.search_and_scrap(term)
         print(scrapper.price_data)
-    scrapper.dump_price_data_as_csv(f'{scrapper_class.__class__}.csv')
+    scrapper.dump_price_data_as_csv(f'{scrapper_class.__name__}.csv')
     scrapper.quit_page()
 
 
 if __name__ == '__main__':
     threads = list()
     for scrapper_class in scrapper_classes:
-        scrap_name = scrapper_class.__class__
+        scrap_name = scrapper_class.__name__
         logging.info("Main    : create and start scrapper %s.", scrap_name)
         x = threading.Thread(target=perform_scrap, args=(scrapper_class,))
         threads.append(x)

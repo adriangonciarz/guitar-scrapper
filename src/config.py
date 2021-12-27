@@ -1,3 +1,5 @@
+import os
+
 olx_basepath = 'https://www.olx.pl/muzyka-edukacja/instrumenty/'
 kleinanziegen_basepath = 'https://www.ebay-kleinanzeigen.de/s-musikinstrumente/c74'
 mercatino_basepath = 'https://www.mercatinomusicale.com/'
@@ -5,6 +7,14 @@ blocket_basepath = 'https://www.blocket.se/annonser/hela_sverige/fritid_hobby/mu
 markplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaarinstrumenten-gitaren-elektrisch/'
 
 headless = False
+
+# Proxy settings
+proxy_enabled = os.getenv('PROXY_ENABLED')
+proxy_server = os.getenv('PROXY_SERVER')
+proxy_port = os.getenv('PROXY_PORT')
+proxy_user = os.getenv('PROXY_USER')
+proxy_password = os.getenv('PROXY_PASSWORD')
+plugin_path = 'proxy_auth_plugin.zip'
 
 brand_models = {
     'PRS': ('Custom 24', 'Custom 22', '408', 'McCarty', '594', 'Paul\'s Guitar'),

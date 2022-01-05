@@ -11,6 +11,7 @@ class KleinanzeigenScrapper(BaseScrapper):
     price_selector = (By.CSS_SELECTOR, 'p.aditem-main--middle--price')
     link_selector = title_selector
     cookies_accept_selector = (By.ID, 'gdpr-banner-accept')
+    empty_results_selector = (By.CSS_SELECTOR, "div.outcomemessage-warning")
 
     def __init__(self):
         super().__init__(config.kleinanziegen_basepath)

@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 import config
@@ -11,6 +12,15 @@ class BlocketScrapper(BaseScrapper):
     price_selector = (By.XPATH, ".//div[contains(@class, 'Price__StyledPrice')]")
     link_selector = title_selector
     cookies_accept_selector = (By.ID, 'accept-ufti')
+    empty_results_selector = (By.XPATH, '//div[contains(@class, "EmptyState__Container")]')
+    clear_input_button = (By.XPATH, '//button[contains(@class, "SearchInput__StyledClearButton")]')
 
     def __init__(self):
         super().__init__(config.blocket_basepath)
+
+    def clear_input(self):
+        try:
+            self.driver.find_element(*self.clear_input_button).click()
+        except NoSuchElementException:
+            pass
+

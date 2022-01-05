@@ -12,11 +12,11 @@ from scrappers.markplaats import MarkplaatsScrapper
 from scrappers.mercatino import MercatinoScrapper
 
 scrapper_classes = [
-    OLXScrapper,
+    # OLXScrapper,
     BlocketScrapper,
-    MarkplaatsScrapper,
-    MercatinoScrapper,
-    KleinanzeigenScrapper
+    # MarkplaatsScrapper,
+    # MercatinoScrapper,
+    # KleinanzeigenScrapper
 ]
 format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=format, level=logging.INFO,
@@ -103,6 +103,4 @@ if __name__ == '__main__':
         x.start()
 
     for index, thread in enumerate(threads):
-        logging.info("Main    : before joining scrapper %s.", scrap_name)
         thread.join()
-        logging.info("Main    : scrap %s done", scrap_name)

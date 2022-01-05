@@ -3,6 +3,7 @@ import zipfile
 from time import sleep
 
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 
@@ -30,6 +31,7 @@ class BaseScrapper:
     price_selector = None
     link_selector = None
     cookies_accept_selector = None
+    empty_results_selector = None
 
     def __init__(self, base_path):
         self.base_path = base_path
@@ -53,12 +55,17 @@ class BaseScrapper:
             f.write(s)
 
     def search_and_scrap(self, query) -> [PriceInfo]:
+        self.clear_input()
         self.search_for_term(query)
-        self.scrap_page()
+        if not self.is_results_empty():
+            self.scrap_page()
+
+    def clear_input(self):
+        search_input = self.driver.find_element(*self.input_selector)
+        search_input.clear()
 
     def search_for_term(self, query):
         search_input = self.driver.find_element(*self.input_selector)
-        search_input.clear()
         search_input.send_keys(query + Keys.ENTER)
         sleep(2)
 
@@ -71,3 +78,11 @@ class BaseScrapper:
             link = link_element.get_attribute('href')
             price = cont.find_element(*self.price_selector).text
             self.price_data.append(PriceInfo(name, price, link))
+
+    def is_results_empty(self):
+        if self.empty_results_selector:
+            try:
+                self.driver.find_element(*self.empty_results_selector)
+                return True
+            except NoSuchElementException:
+                return False

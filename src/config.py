@@ -22,15 +22,17 @@ brand_models = {
     'Music Man': ('Luke', 'Cutlass', 'Silhouette', 'Reflex'),
     'Gibson': ('Les Paul Standard',),
     'Tom Anderson': ('Classic', 'Drop Top'),
-    'Suhr': ('Classic', 'Modern'),
+    'Suhr': ('Classic', 'Modern', 'Scott Henderson'),
     'Parker': ('Fly Classic', 'Fly Mojo'),
     'Mayones': ('Aquila', 'Legend'),
-    'Nik Huber': ('Krautster', 'Orca'),
+    'Nik Huber': ('Krautster', 'Orca', 'Dolphin'),
     'Aristides': ('060',),
     'Eastman': ('sb59', 'sb57', 'sb55'),
-    'James Tyler': ('Studio Elite',),
+    'James Tyler': ('Studio Elite', 'Studio'),
     'Valley Arts': ('Custom', 'California', 'M series'),
     'Harmony': ('Jupiter', 'Rebel', 'Comet'),
+    'Melancon': ('Cajun', 'Custom'),
+    'Lipe': ('Virtuoso', ''),
 }
 
 

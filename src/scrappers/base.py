@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
@@ -20,9 +21,7 @@ def prepare_driver() -> webdriver.Chrome:
     options.add_argument("--disable-infobars")
     # if config.proxy_enabled:
     #     options.add_extension(config.plugin_path)
-    # options.add_argument("--window-size=1920,1200")
-    driver = webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.maximize_window()
     return driver
 
@@ -75,17 +74,24 @@ class BaseScrapper:
         search_input.send_keys(query + Keys.ENTER)
         sleep(5)
 
+    def parse_result_container(self, container: WebElement) -> Item:
+        title_element = container.find_element(*self.title_selector)
+        link_element = container.find_element(*self.link_selector)
+        name = title_element.text
+        link = link_element.get_attribute('href')
+        url_id = re.search(self.url_id_pattern, link).group()  # TODO error handling
+        price = container.find_element(*self.price_selector).text
+        return Item(url_id, name, price, link)
+
     def scrap_page(self) -> [Item]:
         item_containers = self.driver.find_elements(*self.result_container_selector)
         for cont in item_containers:
-            title_element = cont.find_element(*self.title_selector)
-            link_element = cont.find_element(*self.link_selector)
-            name = title_element.text
-            link = link_element.get_attribute('href')
-            url_id = re.search(self.url_id_pattern, link).group()   #TODO error handling
-            price = cont.find_element(*self.price_selector).text
-            self.items.append(Item(url_id, name, price, link))
-            print(f'Item {name} done')
+            try:
+                item = self.parse_result_container(cont)
+                self.items.append(item)
+                print(f'Item {item.name} done')
+            except:
+                print('scrapping element failed')
 
     def is_results_empty(self):
         if self.empty_results_selector:

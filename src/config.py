@@ -5,6 +5,7 @@ kleinanziegen_basepath = 'https://www.ebay-kleinanzeigen.de/s-musikinstrumente/c
 mercatino_basepath = 'https://www.mercatinomusicale.com/'
 blocket_basepath = 'https://www.blocket.se/annonser/hela_sverige/fritid_hobby/musikutrustning/gitarr_bas_forstarkare?cg=6161'
 markplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaarinstrumenten-gitaren-elektrisch/'
+zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 
 headless = False
 
@@ -17,22 +18,29 @@ proxy_password = os.getenv('PROXY_PASSWORD')
 plugin_path = 'proxy_auth_plugin.zip'
 
 brand_models = {
-    'PRS': ('Custom 24', 'Custom 22', '408', 'McCarty', '594', 'Paul\'s Guitar'),
-    'Fender': ('American Standard', 'American Special', 'Custom Shop', 'Masterbuilt', 'Esquire'),
-    'Music Man': ('Luke', 'Cutlass', 'Silhouette', 'Reflex'),
-    'Gibson': ('Les Paul Standard',),
-    'Tom Anderson': ('Classic', 'Drop Top'),
+    'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar'),
+    'Fender': ('Custom Shop',),
+    'Music Man': ('Luke', 'Cutlass',),
+    # 'Gibson': ('Les Paul Standard',),
+    'Tom Anderson': ('Classic', 'Drop Top', 'Angel'),
     'Suhr': ('Classic', 'Modern', 'Scott Henderson'),
-    'Parker': ('Fly Classic', 'Fly Mojo'),
-    'Mayones': ('Aquila', 'Legend'),
+    # 'Parker': ('Fly Classic', 'Fly Mojo'),
+    # 'Mayones': ('Aquila', 'Legend'),
     'Nik Huber': ('Krautster', 'Orca', 'Dolphin'),
-    'Aristides': ('060',),
+    # 'Aristides': ('060',),
     'Eastman': ('sb59', 'sb57', 'sb55'),
-    'James Tyler': ('Studio Elite', 'Studio'),
+    'James Tyler': ('Studio Elite', 'Burning Water'),
     'Valley Arts': ('Custom', 'California', 'M series'),
-    'Harmony': ('Jupiter', 'Rebel', 'Comet'),
-    'Melancon': ('Cajun', 'Custom'),
-    'Lipe': ('Virtuoso', ''),
+    # 'Harmony': ('Jupiter', 'Rebel', 'Comet'),
+    # 'Melancon': ('Cajun', 'Custom'),
+    # 'Lipe': ('Virtuoso', ''),
+    # 'Haar': ('',),
+    # 'Carvin': ('DC 127', 'Bolt'),
+    # 'Fano': ('',),
+    # 'Real Guitars': ('',),
+    # 'SVL': ('',),
+    # 'Nash': ('',),
+    'Maybach': ('Lester', 'Teleman', '')
 }
 
 

@@ -6,7 +6,8 @@ import config
 
 
 @dataclass
-class PriceInfo:
+class Item:
+    id: str
     name: str
     price_string: str
     link: str

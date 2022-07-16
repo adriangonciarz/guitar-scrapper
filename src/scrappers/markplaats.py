@@ -13,6 +13,7 @@ class MarkplaatsScrapper(BaseScrapper):
     link_selector = (By.CSS_SELECTOR, 'a.mp-Listing-coverLink')
     cookies_accept_selector = (By.ID, 'gdpr-consent-banner-accept-button')
     empty_results_selector = (By.XPATH, f'//div[contains(text(), "{no_results_text}")]')
+    url_id_pattern = '\/(a[0-9]+)'
 
     def __init__(self):
         super().__init__(config.markplaats_basepath)

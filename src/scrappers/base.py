@@ -39,7 +39,7 @@ class BaseScrapper:
     def __init__(self, base_path):
         self.base_path = base_path
         self.driver = prepare_driver()
-        self.items: [Item] = []
+        self.items: set(Item) = set()
         self.wait = WebDriverWait(self.driver, 10)
         self.ec = EC
 
@@ -52,7 +52,7 @@ class BaseScrapper:
     def quit_page(self):
         self.driver.quit()
 
-    def dump_price_data_as_csv(self, filename):
+    def dump_items_data_as_csv(self, filename):
         s = '\n'.join(
             [f'{pi.brand};{pi.model};{sanitize_string(pi.name)};{pi.price};{pi.currency};{pi.link}' for pi in
              self.items])
@@ -72,23 +72,22 @@ class BaseScrapper:
     def search_for_term(self, query):
         search_input = self.driver.find_element(*self.input_selector)
         search_input.send_keys(query + Keys.ENTER)
-        sleep(5)
+        sleep(2)
 
     def parse_result_container(self, container: WebElement) -> Item:
         title_element = container.find_element(*self.title_selector)
         link_element = container.find_element(*self.link_selector)
         name = title_element.text
         link = link_element.get_attribute('href')
-        url_id = re.search(self.url_id_pattern, link).group()  # TODO error handling
         price = container.find_element(*self.price_selector).text
-        return Item(url_id, name, price, link)
+        return Item(name, price, link)
 
     def scrap_page(self) -> [Item]:
         item_containers = self.driver.find_elements(*self.result_container_selector)
         for cont in item_containers:
             try:
                 item = self.parse_result_container(cont)
-                self.items.append(item)
+                self.items.add(item)
                 print(f'Item {item.name} done')
             except:
                 print('scrapping element failed')

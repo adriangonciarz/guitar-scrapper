@@ -3,14 +3,15 @@ import sqlite3
 import uuid
 from sqlite3 import Error
 
-from utils import Item
+from models import Item
 
 sql_create_items_table_query = """CREATE TABLE IF NOT EXISTS items (
                                 id text PRIMARY KEY,
                                 link text NOT NULL,
                                 brand text,
                                 model text,
-                                price float
+                                price float,
+                                created timestamp NOT NULL DEFAULT current_timestamp
                             );"""
 
 

@@ -9,7 +9,7 @@ from dbclient import DBClient
 from scrappers.ebay_kleinanziegen import KleinanzeigenScrapper
 from scrappers.olx import OLXScrapper
 from scrappers.blocket import BlocketScrapper
-from scrappers.markplaats import MarkplaatsScrapper
+from scrappers.marktplaats import MarktplaatsScrapper
 from scrappers.mercatino import MercatinoScrapper
 from scrappers.zikinf import ZikinfScrapper
 import argparse
@@ -17,7 +17,7 @@ import argparse
 page_scrappers_map = {
     'olx': OLXScrapper,
     'blocket': BlocketScrapper,
-    'markplaats': MarkplaatsScrapper,
+    'markplaats': MarktplaatsScrapper,
     'mercatino': MercatinoScrapper,
     'kleinanziegen': KleinanzeigenScrapper,
     'zikinf': ZikinfScrapper

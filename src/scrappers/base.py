@@ -1,4 +1,3 @@
-import re
 from time import sleep
 
 from selenium import webdriver
@@ -6,12 +5,13 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 import config
-from utils import Item, sanitize_string
+from models import Item
+from utils import sanitize_string
 
 
 def prepare_driver() -> webdriver.Chrome:

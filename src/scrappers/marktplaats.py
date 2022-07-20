@@ -4,7 +4,7 @@ import config
 from scrappers.base import BaseScrapper
 
 
-class MarkplaatsScrapper(BaseScrapper):
+class MarktplaatsScrapper(BaseScrapper):
     no_results_text = 'Helaas heeft je zoekopdracht'
     input_selector = (By.CSS_SELECTOR, 'input[name="query"]')
     result_container_selector = (By.CSS_SELECTOR, 'li.mp-Listing--list-item')
@@ -16,4 +16,4 @@ class MarkplaatsScrapper(BaseScrapper):
     url_id_pattern = '\/(a[0-9]+)'
 
     def __init__(self):
-        super().__init__(config.markplaats_basepath)
+        super().__init__(config.marktplaats_basepath)

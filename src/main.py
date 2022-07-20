@@ -5,6 +5,7 @@ import zipfile
 
 import config
 from config import search_terms
+from dbclient import DBClient
 from scrappers.ebay_kleinanziegen import KleinanzeigenScrapper
 from scrappers.olx import OLXScrapper
 from scrappers.blocket import BlocketScrapper
@@ -122,5 +123,8 @@ if __name__ == '__main__':
     for term in search_terms():
         scrapper.search_and_scrap(term)
         print(scrapper.items)
-    scrapper.dump_price_data_as_csv(f'{scrapper_class.__name__}.csv')
+    scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
+    db_client = DBClient(f'{scrapper_class.__name__}.db')
+    db_client.create_items_table()
+    db_client.insert_items(scrapper.items)
     scrapper.quit_page()

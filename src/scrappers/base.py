@@ -79,9 +79,8 @@ class BaseScrapper:
         link_element = container.find_element(*self.link_selector)
         name = title_element.text
         link = link_element.get_attribute('href')
-        url_id = re.search(self.url_id_pattern, link).group()  # TODO error handling
         price = container.find_element(*self.price_selector).text
-        return Item(url_id, name, price, link)
+        return Item(name, price, link)
 
     def scrap_page(self) -> [Item]:
         item_containers = self.driver.find_elements(*self.result_container_selector)

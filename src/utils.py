@@ -1,22 +1,15 @@
 import re
-from dataclasses import dataclass
 from typing import Optional
 
 import config
+from config import currency_map
 
 
-@dataclass
 class Item:
-    id: str
-    name: str
-    price_string: str
-    link: str
-
-    currency_map = {
-        'PLN': ('zł', 'PLN'),
-        'EUR': ('€', 'EUR'),
-        'SEK': ('kr', 'SEK')
-    }
+    def __init__(self, name: str, price_string: str, link: str):
+        self.name = name
+        self.price_string = price_string
+        self.link = link
 
     @property
     def price(self) -> Optional[int]:
@@ -25,7 +18,7 @@ class Item:
 
     @property
     def currency(self):
-        for key, values in self.currency_map.items():
+        for key, values in currency_map.items():
             for value in values:
                 if value in self.price_string:
                     return key

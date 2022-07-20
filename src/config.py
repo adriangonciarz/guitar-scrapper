@@ -43,6 +43,12 @@ brand_models = {
     'Maybach': ('Lester', 'Teleman', '')
 }
 
+currency_map = {
+    'PLN': ('zł', 'PLN'),
+    'EUR': ('€', 'EUR'),
+    'SEK': ('kr', 'SEK')
+}
+
 
 def search_terms():
     terms = []

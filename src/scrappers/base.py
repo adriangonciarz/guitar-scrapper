@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import config
 from models import Item
-from utils import sanitize_string
+from utils import sanitize_string_for_csv
 
 
 def prepare_driver() -> webdriver.Chrome:
@@ -54,7 +54,7 @@ class BaseScrapper:
 
     def dump_items_data_as_csv(self, filename):
         s = '\n'.join(
-            [f'{pi.brand};{pi.model};{sanitize_string(pi.name)};{pi.price};{pi.currency};{pi.link}' for pi in
+            [f'{pi.brand};{pi.model};{sanitize_string_for_csv(pi.name)};{pi.price};{pi.currency};{pi.link}' for pi in
              self.items])
         with open(filename, 'w') as f:
             f.write(s)

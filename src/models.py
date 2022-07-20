@@ -3,6 +3,7 @@ from typing import Optional
 
 import config
 from config import currency_map
+from utils import unify_item_name
 
 
 class Item:
@@ -27,7 +28,7 @@ class Item:
     @property
     def brand(self):
         for b in config.brand_models.keys():
-            if b.lower() in self.name.lower():
+            if unify_item_name(b) in unify_item_name(self.name):
                 return b
         return None
 
@@ -35,6 +36,6 @@ class Item:
     def model(self):
         if self.brand:
             for model in config.brand_models[self.brand]:
-                if model.lower() in self.name.lower():
+                if unify_item_name(model) in unify_item_name(self.name):
                     return model
             return None

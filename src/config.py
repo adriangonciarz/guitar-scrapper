@@ -1,5 +1,3 @@
-import os
-
 olx_basepath = 'https://www.olx.pl/muzyka-edukacja/instrumenty/'
 kleinanziegen_basepath = 'https://www.ebay-kleinanzeigen.de/s-musikinstrumente/c74'
 mercatino_basepath = 'https://www.mercatinomusicale.com/'
@@ -8,6 +6,8 @@ marktplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaa
 zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 
 headless = False
+MAX_PARALLEL_SCRAPPERS = 3
+DATABASE_FILENAME = 'scrapper.db'
 
 brand_models = {
     'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar', 'DGT'),

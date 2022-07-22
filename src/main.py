@@ -12,8 +12,6 @@ from scrappers.mercatino import MercatinoScrapper
 from scrappers.olx import OLXScrapper
 from scrappers.zikinf import ZikinfScrapper
 
-MAX_PARALLEL_SCRAPPERS = 3
-
 page_scrappers_map = {
     'olx': OLXScrapper,
     'blocket': BlocketScrapper,
@@ -58,15 +56,14 @@ def scrap_single_website(website_name):
     for term in search_terms():
         scrapper.search_and_scrap(term)
     scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
-    db_client = DBClient(f'{scrapper_class.__name__}.db')
-    db_client.create_items_table()
+    db_client = DBClient(config.DATABASE_FILENAME)
     db_client.insert_items(scrapper.items)
     scrapper.quit_page()
 
 
 def scrap_all_websites():
     print('Scrapping all websites')
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_PARALLEL_SCRAPPERS) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=config.MAX_PARALLEL_SCRAPPERS) as executor:
         executor.map(scrap_single_website, page_scrappers_map.keys())
 
 
@@ -75,4 +72,3 @@ if __name__ == '__main__':
         scrap_all_websites()
     else:
         scrap_single_website(args.website)
-    # create_proxyauth_extension(config.proxy_server, config.proxy_port, config.proxy_user, config.proxy_password)

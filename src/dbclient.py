@@ -2,7 +2,7 @@ import base64
 import sqlite3
 import uuid
 from sqlite3 import Error
-
+from utils import sanitize_string_for_database
 from models import Item
 
 sql_create_items_table_query = """CREATE TABLE IF NOT EXISTS items (
@@ -32,7 +32,7 @@ class DBClient:
         hash_id = base64.b64encode(item.link.encode('ascii')).decode() if item.link else str(uuid.uuid4())
         insert_query = "INSERT INTO items(id,title,link,brand,model,price) VALUES('{}','{}','{}','{}','{}','{}');".format(
             hash_id,
-            item.name,
+            sanitize_string_for_database(item.name),
             item.link,
             item.brand,
             item.model,

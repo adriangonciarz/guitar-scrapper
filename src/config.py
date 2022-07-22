@@ -19,13 +19,13 @@ plugin_path = 'proxy_auth_plugin.zip'
 
 brand_models = {
     'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar', 'DGT'),
-    'Fender': ('Custom Shop', 'masterbuilt'),
-    'Music Man': ('Luke', 'Cutlass',),
+    'Fender': ('Telecaster Custom Shop', 'Stratocaster Custom Shop', 'Nocaster', 'masterbuilt'),
+    'Music Man': ('Luke', 'Cutlass', 'Axis'),
     'Tom Anderson': ('Classic', 'Drop Top', 'Angel'),
-    'Suhr': ('Classic', 'Modern', 'Scott Henderson'),
+    'Suhr': ('Modern', 'Scott Henderson'),
     'Nik Huber': ('Krautster', 'Orca', 'Dolphin'),
     'Eastman': ('sb59', 'sb57', 'sb55'),
-    'James Tyler': ('Studio Elite', 'Burning Water'),
+    'James Tyler': ('Studio Elite', 'Burning Water', 'Classic'),
     'Valley Arts': ('Custom', 'California', 'M series'),
     'Maybach': ('Lester', 'Teleman', 'Capitol'),
 

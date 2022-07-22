@@ -1,5 +1,6 @@
 from utils import sanitize_string_for_csv, unify_item_name
 
+
 def test_sanitzing_string_for_csv():
     test_string = 'Super awesome; buy, now!'
     assert sanitize_string_for_csv(test_string) == 'Super awesome buy now!'

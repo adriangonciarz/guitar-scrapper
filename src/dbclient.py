@@ -7,6 +7,7 @@ from models import Item
 
 sql_create_items_table_query = """CREATE TABLE IF NOT EXISTS items (
                                 id text PRIMARY KEY,
+                                title text NOT NULL,
                                 link text NOT NULL,
                                 brand text,
                                 model text,
@@ -29,11 +30,13 @@ class DBClient:
 
     def insert_item(self, item: Item, autocommit=True):
         hash_id = base64.b64encode(item.link.encode('ascii')).decode() if item.link else str(uuid.uuid4())
-        insert_query = "INSERT INTO items(id,link,brand,model,price) VALUES('{}','{}','{}','{}','{}');".format(hash_id,
-                                                                                                               item.link,
-                                                                                                               item.brand,
-                                                                                                               item.model,
-                                                                                                               item.price)
+        insert_query = "INSERT INTO items(id,title,link,brand,model,price) VALUES('{}','{}','{}','{}','{}','{}');".format(
+            hash_id,
+            item.name,
+            item.link,
+            item.brand,
+            item.model,
+            item.price)
         print(insert_query)
         self.__execute_sql(insert_query)
         if autocommit:
@@ -62,18 +65,7 @@ class DBClient:
     def __commit(self):
         self.conn.commit()
 
-    def select_all_items_and_print(self):
+    def fetch_all_items(self):
         c = self.conn.cursor()
         c.execute('SELECT * FROM items')
-        rows = c.fetchall()
-        print(rows)
-
-
-if __name__ == '__main__':
-    items = [
-        Item(1, 'PRS Custom 24', '2050', 'http://onet.pl?item=1232345'),
-        Item(2, 'PRS 408', '3500', 'http://onet.pl?item=12a3454'),
-    ]
-    cli = DBClient('test_db.db')
-    cli.insert_items(items)
-    cli.select_all_items_and_print()
+        return c.fetchall()

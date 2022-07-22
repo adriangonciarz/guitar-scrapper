@@ -9,14 +9,6 @@ zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 
 headless = False
 
-# Proxy settings
-proxy_enabled = os.getenv('PROXY_ENABLED')
-proxy_server = os.getenv('PROXY_SERVER')
-proxy_port = os.getenv('PROXY_PORT')
-proxy_user = os.getenv('PROXY_USER')
-proxy_password = os.getenv('PROXY_PASSWORD')
-plugin_path = 'proxy_auth_plugin.zip'
-
 brand_models = {
     'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar', 'DGT'),
     'Fender': ('Telecaster Custom Shop', 'Stratocaster Custom Shop', 'Nocaster', 'masterbuilt'),
@@ -28,7 +20,6 @@ brand_models = {
     'James Tyler': ('Studio Elite', 'Burning Water', 'Classic'),
     'Valley Arts': ('Custom', 'California', 'M series'),
     'Maybach': ('Lester', 'Teleman', 'Capitol'),
-
     # 'Parker': ('Fly Classic', 'Fly Mojo'),
     # 'Gibson': ('Les Paul Standard',),
     # 'Mayones': ('Aquila', 'Legend'),
@@ -47,7 +38,6 @@ brand_models = {
 currency_map = {
     'PLN': ('zł', 'PLN'),
     'EUR': ('€', 'EUR'),
-    'SEK': ('kr', 'SEK')
 }
 
 

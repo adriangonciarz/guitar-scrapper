@@ -19,8 +19,6 @@ def prepare_driver() -> webdriver.Chrome:
     options.headless = config.headless
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-infobars")
-    # if config.proxy_enabled:
-    #     options.add_extension(config.plugin_path)
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.maximize_window()
     return driver
@@ -38,16 +36,29 @@ class BaseScrapper:
 
     def __init__(self, base_path):
         self.base_path = base_path
-        self.driver = prepare_driver()
-        self.items: set(Item) = set()
+        self.driver = None
+        self.items: [Item] = []
         self.wait = WebDriverWait(self.driver, 10)
         self.ec = EC
 
+    def __is_link_already_scrapped(self, item_link):
+        for item in self.items:
+            if item_link in item.link or item.link in item_link:
+                return True
+        return False
+
     def open_page(self):
+        self.driver = prepare_driver()
         self.driver.get(self.base_path)
         if self.cookies_accept_selector:
             sleep(1)
             self.driver.find_element(*self.cookies_accept_selector).click()
+
+    def add_item(self, item: Item):
+        if not self.__is_link_already_scrapped(item.link):
+            self.items.append(item)
+        else:
+            print(f'Item with link {item.link} already scrapped')
 
     def quit_page(self):
         self.driver.quit()
@@ -72,7 +83,7 @@ class BaseScrapper:
     def search_for_term(self, query):
         search_input = self.driver.find_element(*self.input_selector)
         search_input.send_keys(query + Keys.ENTER)
-        sleep(2)
+        sleep(1)
 
     def parse_result_container(self, container: WebElement) -> Item:
         title_element = container.find_element(*self.title_selector)
@@ -87,7 +98,7 @@ class BaseScrapper:
         for cont in item_containers:
             try:
                 item = self.parse_result_container(cont)
-                self.items.add(item)
+                self.add_item(item)
                 print(f'Item {item.name} done')
             except:
                 print('scrapping element failed')

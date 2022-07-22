@@ -1,9 +1,14 @@
-from utils import sanitize_string_for_csv, unify_item_name
+from utils import sanitize_string_for_csv, unify_item_name, sanitize_string_for_database
 
 
 def test_sanitzing_string_for_csv():
     test_string = 'Super awesome; buy, now!'
     assert sanitize_string_for_csv(test_string) == 'Super awesome buy now!'
+
+
+def test_sanitizing_string_for_database():
+    test_string = "Paul's guitar"
+    assert sanitize_string_for_database(test_string) == "Pauls guitar"
 
 
 def test_cleanup_name():

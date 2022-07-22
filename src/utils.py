@@ -1,5 +1,9 @@
 def sanitize_string_for_csv(input_string: str):
-    return input_string.replace(',', '').replace(';', ' ')
+    return input_string.replace(',', '').replace(';', '')
+
+
+def sanitize_string_for_database(input_string: str):
+    return input_string.replace('\'', '')
 
 
 def unify_item_name(input_string: str):

@@ -1,18 +1,18 @@
+import argparse
+import concurrent.futures
 import logging
-import os
-import threading
-import zipfile
 
 import config
 from config import search_terms
 from dbclient import DBClient
-from scrappers.ebay_kleinanziegen import KleinanzeigenScrapper
-from scrappers.olx import OLXScrapper
 from scrappers.blocket import BlocketScrapper
+from scrappers.ebay_kleinanziegen import KleinanzeigenScrapper
 from scrappers.marktplaats import MarktplaatsScrapper
 from scrappers.mercatino import MercatinoScrapper
+from scrappers.olx import OLXScrapper
 from scrappers.zikinf import ZikinfScrapper
-import argparse
+
+MAX_PARALLEL_SCRAPPERS = 3
 
 page_scrappers_map = {
     'olx': OLXScrapper,
@@ -51,83 +51,12 @@ group.add_argument("--all", action='store_true', help="Flag to scrap all website
 args = parser.parse_args()
 
 
-def create_proxyauth_extension(proxy_host, proxy_port,
-                               proxy_username, proxy_password,
-                               scheme='http'):
-    import string
-    import zipfile
-
-    manifest_json = """
-    {
-        "version": "1.0.0",
-        "manifest_version": 2,
-        "name": "Chrome Proxy",
-        "permissions": [
-            "proxy",
-            "tabs",
-            "unlimitedStorage",
-            "storage",
-            "",
-            "webRequest",
-            "webRequestBlocking"
-        ],
-        "background": {
-            "scripts": ["background.js"]
-        },
-        "minimum_chrome_version":"22.0.0"
-    }
-    """
-
-    background_js = string.Template(
-        """
-        var config = {
-                mode: "fixed_servers",
-                rules: {
-                  singleProxy: {
-                    scheme: "${scheme}",
-                    host: "${host}",
-                    port: parseInt(${port})
-                  },
-                  bypassList: ["foobar.com"]
-                }
-              };
-     
-        chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
-     
-        function callbackFn(details) {
-            return {
-                authCredentials: {
-                    username: "${username}",
-                    password: "${password}"
-                }
-            };
-        }
-     
-        chrome.webRequest.onAuthRequired.addListener(
-                    callbackFn,
-                    {urls: [""]},
-                    ['blocking']
-        );
-        """
-    ).substitute(
-        host=proxy_host,
-        port=proxy_port,
-        username=proxy_username,
-        password=proxy_password,
-        scheme=scheme,
-    )
-    with zipfile.ZipFile(config.plugin_path, 'w') as zp:
-        zp.writestr("manifest.json", manifest_json)
-        zp.writestr("background.js", background_js)
-
-
 def scrap_single_website(website_name):
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
     scrapper.open_page()
     for term in search_terms():
         scrapper.search_and_scrap(term)
-        print(scrapper.items)
     scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
     db_client = DBClient(f'{scrapper_class.__name__}.db')
     db_client.create_items_table()
@@ -137,6 +66,8 @@ def scrap_single_website(website_name):
 
 def scrap_all_websites():
     print('Scrapping all websites')
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_PARALLEL_SCRAPPERS) as executor:
+        executor.map(scrap_single_website, page_scrappers_map.keys())
 
 
 if __name__ == '__main__':

@@ -61,12 +61,12 @@ class DBClient:
 
     def fetch_all_items(self):
         c = self.conn.cursor()
-        c.execute('SELECT * FROM items')
+        c.execute('SELECT * FROM items ORDER BY last_updated DESC')
         return c.fetchall()
 
     def fetch_brand_items(self, brand_name):
         c = self.conn.cursor()
-        c.execute(f"SELECT * FROM items WHERE brand='{brand_name}'")
+        c.execute(f"SELECT * FROM items WHERE brand='{brand_name}' ORDER BY last_updated DESC")
         return c.fetchall()
 
     def create_database(self, db_name):

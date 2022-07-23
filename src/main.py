@@ -57,6 +57,7 @@ def scrap_single_website(website_name):
     for term in search_terms():
         scrapper.search_and_scrap(term)
         db_client.insert_items(scrapper.items)
+        scrapper.clear_items()
     # scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
     scrapper.quit_page()
 

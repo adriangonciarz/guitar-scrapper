@@ -2,25 +2,29 @@ import base64
 import sqlite3
 import uuid
 from sqlite3 import Error
+
+import config
 from utils import sanitize_string_for_database
 from models import Item
+import mysql.connector
 
 sql_create_items_table_query = """CREATE TABLE IF NOT EXISTS items (
-                                id text PRIMARY KEY,
-                                title text NOT NULL,
-                                link text NOT NULL,
-                                brand text,
-                                model text,
-                                price float,
-                                currency text,
-                                created timestamp NOT NULL DEFAULT current_timestamp
+                                id VARCHAR(255) PRIMARY KEY,
+                                title TEXT NOT NULL,
+                                link TEXT NOT NULL,
+                                brand TINYTEXT,
+                                model TINYTEXT,
+                                price FLOAT,
+                                currency TINYTEXT,
+                                last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                             );"""
 
 
 class DBClient:
-    def __init__(self, db_file):
+    def __init__(self, db_name=None):
         self.conn = None
-        self.__create_connection(db_file)
+        self.db_name = db_name
+        self.__create_connection()
 
     def __del__(self):
         if self.conn:
@@ -65,11 +69,19 @@ class DBClient:
         c.execute(f"SELECT * FROM items WHERE brand='{brand_name}'")
         return c.fetchall()
 
-    def __create_connection(self, db_file):
+    def create_database(self, db_name):
+        self.conn.cursor().execute(f"CREATE DATABASE {db_name}")
+
+    def __create_connection(self):
         """ create a database connection to a SQLite database """
         try:
-            self.conn = sqlite3.connect(db_file)
-            print(sqlite3.version)
+            self.conn = mysql.connector.connect(
+                host=config.DB_HOST,
+                user=config.DB_USER,
+                password=config.DB_PASSWORD,
+                database=self.db_name
+            )
+            print('DB Connection successful')
         except Error as e:
             print(e)
 

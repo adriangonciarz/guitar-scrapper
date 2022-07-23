@@ -6,7 +6,7 @@ import config
 from config import search_terms
 from dbclient import DBClient
 from scrappers.blocket import BlocketScrapper
-from scrappers.ebay_kleinanziegen import KleinanzeigenScrapper
+from scrappers.kleinanziegen import KleinanzeigenScrapper
 from scrappers.marktplaats import MarktplaatsScrapper
 from scrappers.mercatino import MercatinoScrapper
 from scrappers.olx import OLXScrapper
@@ -15,7 +15,7 @@ from scrappers.zikinf import ZikinfScrapper
 page_scrappers_map = {
     'olx': OLXScrapper,
     'blocket': BlocketScrapper,
-    'markplaats': MarktplaatsScrapper,
+    'marktplaats': MarktplaatsScrapper,
     'mercatino': MercatinoScrapper,
     'kleinanziegen': KleinanzeigenScrapper,
     'zikinf': ZikinfScrapper

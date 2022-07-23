@@ -3,6 +3,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -36,7 +37,7 @@ class BaseScrapper:
 
     def __init__(self, base_path):
         self.base_path = base_path
-        self.driver = None
+        self.driver: WebDriver = None
         self.items: [Item] = []
         self.wait = WebDriverWait(self.driver, 10)
         self.ec = EC

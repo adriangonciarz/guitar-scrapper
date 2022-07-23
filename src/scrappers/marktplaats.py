@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 import config
@@ -17,3 +18,9 @@ class MarktplaatsScrapper(BaseScrapper):
 
     def __init__(self):
         super().__init__(config.marktplaats_basepath)
+
+    def clear_input(self):
+        current_query = self.driver.find_element(*self.input_selector).get_attribute('value')
+        self.driver.find_element(*self.input_selector).click()
+        for _ in range(len(current_query)):
+            self.driver.find_element(*self.input_selector).send_keys(Keys.BACKSPACE)

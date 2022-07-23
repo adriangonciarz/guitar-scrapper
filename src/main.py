@@ -50,7 +50,7 @@ args = parser.parse_args()
 
 
 def scrap_single_website(website_name):
-    db_client = DBClient()
+    db_client = DBClient(config.DB_NAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
     scrapper.open_page()

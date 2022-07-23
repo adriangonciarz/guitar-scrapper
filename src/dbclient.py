@@ -35,7 +35,7 @@ class DBClient:
 
     def insert_item(self, item: Item, autocommit=True):
         hash_id = base64.b64encode(item.link.encode('ascii')).decode() if item.link else str(uuid.uuid4())
-        insert_query = "INSERT INTO items(id,title,link,brand,model,price,currency) VALUES('{}','{}','{}','{}','{}','{}','{}');".format(
+        insert_query = "INSERT INTO items(id,title,link,brand,model,price,currency) VALUES('{}','{}','{}','{}','{}','{}','{}') ON DUPLICATE KEY UPDATE last_updated=CURRENT_TIMESTAMP;".format(
             hash_id,
             sanitize_string_for_database(item.name),
             item.link,

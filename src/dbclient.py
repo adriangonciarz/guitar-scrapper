@@ -12,6 +12,7 @@ sql_create_items_table_query = """CREATE TABLE IF NOT EXISTS items (
                                 brand text,
                                 model text,
                                 price float,
+                                currency text,
                                 created timestamp NOT NULL DEFAULT current_timestamp
                             );"""
 
@@ -30,13 +31,15 @@ class DBClient:
 
     def insert_item(self, item: Item, autocommit=True):
         hash_id = base64.b64encode(item.link.encode('ascii')).decode() if item.link else str(uuid.uuid4())
-        insert_query = "INSERT INTO items(id,title,link,brand,model,price) VALUES('{}','{}','{}','{}','{}','{}');".format(
+        insert_query = "INSERT INTO items(id,title,link,brand,model,price,currency) VALUES('{}','{}','{}','{}','{}','{}','{}');".format(
             hash_id,
             sanitize_string_for_database(item.name),
             item.link,
-            item.brand,
-            item.model,
-            item.price)
+            sanitize_string_for_database(item.brand) if item.brand else None,
+            sanitize_string_for_database(item.model) if item.model else None,
+            item.price,
+            item.currency
+        )
         print(insert_query)
         self.__execute_sql(insert_query)
         if autocommit:

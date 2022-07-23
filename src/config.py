@@ -38,6 +38,7 @@ brand_models = {
 currency_map = {
     'PLN': ('zł', 'PLN'),
     'EUR': ('€', 'EUR'),
+    'SEK': ('SEK', 'kr')
 }
 
 

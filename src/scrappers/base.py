@@ -84,7 +84,7 @@ class BaseScrapper:
     def search_for_term(self, query):
         search_input = self.driver.find_element(*self.input_selector)
         search_input.send_keys(query + Keys.ENTER)
-        sleep(1)
+        sleep(3)
 
     def parse_result_container(self, container: WebElement) -> Item:
         title_element = container.find_element(*self.title_selector)

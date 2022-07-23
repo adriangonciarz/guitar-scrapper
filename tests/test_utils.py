@@ -8,7 +8,7 @@ def test_sanitzing_string_for_csv():
 
 def test_sanitizing_string_for_database():
     test_string = "Paul's guitar"
-    assert sanitize_string_for_database(test_string) == "Pauls guitar"
+    assert sanitize_string_for_database(test_string) == "Paul''s guitar"
 
 
 def test_cleanup_name():

@@ -50,14 +50,14 @@ args = parser.parse_args()
 
 
 def scrap_single_website(website_name):
+    db_client = DBClient(config.DATABASE_FILENAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
     scrapper.open_page()
     for term in search_terms():
         scrapper.search_and_scrap(term)
-    scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
-    db_client = DBClient(config.DATABASE_FILENAME)
-    db_client.insert_items(scrapper.items)
+        db_client.insert_items(scrapper.items)
+    # scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
     scrapper.quit_page()
 
 
@@ -68,6 +68,7 @@ def scrap_all_websites():
 
 
 if __name__ == '__main__':
+    # db_client = DBClient(config.DATABASE_FILENAME).create_items_table()
     if args.all:
         scrap_all_websites()
     else:

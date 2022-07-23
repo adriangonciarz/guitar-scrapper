@@ -14,6 +14,10 @@ class Item:
 
     @property
     def price(self) -> Optional[int]:
+        """If the price contains both comma and a dot, dot is treated
+        as separator for digit triples and the comma for floating values"""
+        if price_group := re.search('(\d+.\d+),(\d+)', self.price_string):
+            return int(price_group.group(1).replace('.', ''))
         price_extracted = ''.join(re.findall('[0-9]+', self.price_string))
         return int(price_extracted) if price_extracted else None
 

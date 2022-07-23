@@ -50,6 +50,21 @@ class DBClient:
             self.insert_item(item, autocommit=False)
         self.__commit()
 
+    def fetch_brands(self):
+        c = self.conn.cursor()
+        c.execute("SELECT brand FROM items GROUP BY brand;")
+        return c.fetchall()
+
+    def fetch_all_items(self):
+        c = self.conn.cursor()
+        c.execute('SELECT * FROM items')
+        return c.fetchall()
+
+    def fetch_brand_items(self, brand_name):
+        c = self.conn.cursor()
+        c.execute(f"SELECT * FROM items WHERE brand='{brand_name}'")
+        return c.fetchall()
+
     def __create_connection(self, db_file):
         """ create a database connection to a SQLite database """
         try:
@@ -67,8 +82,3 @@ class DBClient:
 
     def __commit(self):
         self.conn.commit()
-
-    def fetch_all_items(self):
-        c = self.conn.cursor()
-        c.execute('SELECT * FROM items')
-        return c.fetchall()

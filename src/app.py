@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 import config
 from dbclient import DBClient
@@ -7,9 +7,25 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def v_timestamp():
+def index():
+    db_client = DBClient(config.DATABASE_FILENAME)
+    brands = db_client.fetch_brands()
+    return render_template('index.html', brands=brands)
+
+
+@app.route('/all')
+def all_items():
     db_client = DBClient(config.DATABASE_FILENAME)
     data = db_client.fetch_all_items()
+    return render_template('item_list.html', data=data)
+
+
+@app.route('/brands', methods=['GET'])
+def brand_items():
+    args = request.args
+    name = args.get('name')
+    db_client = DBClient(config.DATABASE_FILENAME)
+    data = db_client.fetch_brand_items(name)
     return render_template('item_list.html', data=data)
 
 

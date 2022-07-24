@@ -1,8 +1,7 @@
 import re
 from typing import Optional
 
-import config
-from config import currency_map
+from config.config import currency_map, brand_models
 from utils import unify_item_name
 
 
@@ -31,7 +30,7 @@ class Item:
 
     @property
     def brand(self):
-        for b in config.brand_models.keys():
+        for b in brand_models.keys():
             if unify_item_name(b) in unify_item_name(self.name):
                 return b
         return None
@@ -39,7 +38,7 @@ class Item:
     @property
     def model(self):
         if self.brand:
-            for model in config.brand_models[self.brand]:
+            for model in brand_models[self.brand]:
                 if unify_item_name(model) in unify_item_name(self.name):
                     return model
             return None

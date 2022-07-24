@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-import config
+from config.config import DB_NAME
 from dbclient import DBClient
 
 app = Flask(__name__)
@@ -8,14 +8,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    db_client = DBClient(config.DB_NAME)
+    db_client = DBClient(DB_NAME)
     brands = db_client.fetch_brands()
     return render_template('index.html', brands=brands)
 
 
 @app.route('/all')
 def all_items():
-    db_client = DBClient(config.DB_NAME)
+    db_client = DBClient(DB_NAME)
     data = db_client.fetch_all_items()
     return render_template('item_list.html', data=data)
 
@@ -24,7 +24,7 @@ def all_items():
 def brand_items():
     args = request.args
     name = args.get('name')
-    db_client = DBClient(config.DB_NAME)
+    db_client = DBClient(DB_NAME)
     data = db_client.fetch_brand_items(name)
     return render_template('item_list.html', data=data)
 

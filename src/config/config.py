@@ -17,16 +17,16 @@ DB_NAME = 'scrapper'
 
 brand_models = {
     'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar', 'DGT'),
-    'Fender': ('Telecaster Custom Shop', 'Stratocaster Custom Shop', 'Nocaster', 'masterbuilt'),
+    'Fender': ('Telecaster Custom Shop', 'Stratocaster Custom Shop', 'Nocaster', 'Stratocaster Masterbuilt', 'Telecaster Masterbuilt'),
     'Music Man': ('Luke', 'Cutlass', 'Axis'),
     'Tom Anderson': ('Classic', 'Drop Top', 'Angel'),
     'Suhr': ('Modern', 'Scott Henderson'),
-    'Nik Huber': ('Krautster', 'Orca', 'Dolphin'),
-    'Eastman': ('sb59', 'sb57', 'sb55'),
+    'Nik Huber': ('Krautster',),
+    'Eastman': ('sb59', 'sb57',),
     'James Tyler': ('Studio Elite', 'Burning Water', 'Classic'),
-    'Valley Arts': ('Custom', 'California', 'M series'),
+    # 'Valley Arts': ('Custom', 'California', 'M series'),
     'Maybach': ('Lester', 'Teleman', 'Capitol'),
-    # 'Parker': ('Fly Classic', 'Fly Mojo'),
+    'Parker': ('Fly',),
     # 'Gibson': ('Les Paul Standard',),
     # 'Mayones': ('Aquila', 'Legend'),
     # 'Aristides': ('060',),
@@ -39,6 +39,7 @@ brand_models = {
     # 'Real Guitars': ('',),
     # 'SVL': ('',),
     # 'Nash': ('',),
+    'Xotic': ('XSC', 'XTC')
 }
 
 currency_map = {

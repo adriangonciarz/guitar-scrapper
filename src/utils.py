@@ -17,3 +17,10 @@ def unify_item_name(input_string: str):
         input_string = input_string.replace(c, '')
 
     return input_string.replace(' ', '').lower()
+
+
+def check_if_result_matches_model(result: str, model: str):
+    result_split = result.split()
+    model_split = model.split()
+    return all(map(lambda word: word in result_split, model_split))
+

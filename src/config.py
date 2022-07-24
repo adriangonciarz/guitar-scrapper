@@ -1,3 +1,5 @@
+import os
+
 olx_basepath = 'https://www.olx.pl/muzyka-edukacja/instrumenty/'
 kleinanziegen_basepath = 'https://www.ebay-kleinanzeigen.de/s-musikinstrumente/c74'
 mercatino_basepath = 'https://www.mercatinomusicale.com/'
@@ -7,7 +9,11 @@ zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 
 headless = False
 MAX_PARALLEL_SCRAPPERS = 3
-DATABASE_FILENAME = 'scrapper.db'
+DB_HOST = os.getenv('DBHOST')
+DB_PORT = os.getenv('DBPORT', 3306)
+DB_USER = os.getenv('DBUSER')
+DB_PASSWORD = os.getenv('DBPASSWORD')
+DB_NAME = 'scrapper'
 
 brand_models = {
     'PRS': ('Custom 24', '408', 'McCarty', '594', 'Paul\'s Guitar', 'DGT'),

@@ -77,6 +77,9 @@ class BaseScrapper:
         if not self.is_results_empty():
             self.scrap_page()
 
+    def clear_items(self):
+        self.items = []
+
     def clear_input(self):
         search_input = self.driver.find_element(*self.input_selector)
         search_input.clear()

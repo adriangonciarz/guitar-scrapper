@@ -1,6 +1,6 @@
 import pytest
 
-from utils import sanitize_string_for_csv, unify_item_name, sanitize_string_for_database, check_if_result_matches_model
+from utils import sanitize_string_for_csv, unify_item_name, sanitize_string_for_database, check_if_result_matches_substring
 
 
 def test_sanitzing_string_for_csv():
@@ -31,7 +31,9 @@ def test_cleanup_name():
         ("PRS Custom-24", 'Custom 22', False),
         ("PRS CU 24", 'CU-24', True),
         ("PRS CU 24", 'CU-22', False),
+        ("PRS CU 24", 'PRS', True),
+        ("Music Man Axis Floyd Rose", 'Music Man', True),
     ]
 )
-def test_checking_if_result_matching(result, model, matched):
-    assert check_if_result_matches_model(result, model) == matched
+def test_checking_result_matching(result, model, matched):
+    assert check_if_result_matches_substring(result, model) == matched

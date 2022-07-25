@@ -4,7 +4,7 @@ import os
 
 import config
 from dbclient import DBClient
-from models import SearchManager
+from models import BrandManager
 from scrappers.blocket import BlocketScrapper
 from scrappers.kleinanziegen import KleinanzeigenScrapper
 from scrappers.marktplaats import MarktplaatsScrapper
@@ -45,7 +45,7 @@ group.add_argument("--all", action='store_true', help="Flag to scrap all website
 args = parser.parse_args()
 
 brands_config_yaml_path = os.path.join(os.getcwd(), 'config', 'brands.yaml')
-search_manager = SearchManager(brands_config_yaml_path)
+search_manager = BrandManager(brands_config_yaml_path)
 
 
 def scrap_single_website(website_name):

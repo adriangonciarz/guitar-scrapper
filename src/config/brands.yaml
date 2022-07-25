@@ -151,9 +151,9 @@
     - name: Custom
       aliases: [ ]
       search: false
-- brand: Kelton
+- brand: Kelton Swade
   brand_aliases: []
   models:
-    - name: Swade
+    - name: AVRT
       aliases: []
       search: true

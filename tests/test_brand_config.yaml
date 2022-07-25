@@ -13,9 +13,9 @@
     - name: SB57
       aliases: [SB-57]
       search: true
-- brand: Kelton
+- brand: Kelton Swade
   brand_aliases: []
   models:
-    - name: Swade
+    - name: AVRT
       aliases: []
       search: true

@@ -3,3 +3,6 @@ webdriver-manager==3.8.1
 mysql-connector-python==8.0.29
 pytest
 flask
+pyyaml
+pytest-xdist
+assertpy

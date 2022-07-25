@@ -1,5 +1,8 @@
+import dataclasses
 import re
 from typing import Optional
+
+import yaml
 
 from config.config import currency_map, brand_models
 from utils import unify_item_name
@@ -42,3 +45,45 @@ class Item:
                 if unify_item_name(model) in unify_item_name(self.name):
                     return model
             return None
+
+
+@dataclasses.dataclass
+class Model:
+    name: str
+    search: bool
+    aliases: [str]
+
+
+@dataclasses.dataclass
+class Brand:
+    name: str
+    models: [Model]
+    aliases: [str]
+
+
+class SearchManager:
+    def __init__(self, config_path):
+        self.brands: [Brand] = []
+
+        with open(config_path) as file:
+            brands_config = yaml.load(file, Loader=yaml.FullLoader)
+            for brand in brands_config:
+                models = [Model(m['name'], m['search'], m['aliases']) for m in brand['models']]
+                self.brands.append(Brand(brand['brand'], models, brand['brand_aliases']))
+
+    def get_brands(self):
+        return [b.name for b in self.brands]
+
+    def get_search_terms(self):
+        terms = []
+        for brand in self.brands:
+            for model in brand.models:
+                if model.search:
+                    terms.append(f'{brand.name} {model.name}'.lower())
+        return terms
+
+
+if __name__ == '__main__':
+    sm = SearchManager('config/brands.yaml')
+    print(sm.get_brands())
+    print(sm.get_search_terms())

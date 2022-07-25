@@ -1,0 +1,21 @@
+- brand: Music Man
+  brand_aliases: [MM, MusicMan, musicman, EBMM, Ernie Ball]
+  models:
+    - name: Luke
+      aliases: [Lukather]
+      search: true
+    - name: Cutlass
+      aliases: []
+      search: false
+- brand: Eastman
+  brand_aliases: []
+  models:
+    - name: SB57
+      aliases: [SB-57]
+      search: true
+- brand: Kelton
+  brand_aliases: []
+  models:
+    - name: Swade
+      aliases: []
+      search: true

@@ -20,7 +20,9 @@ def unify_item_name(input_string: str):
 
 
 def check_if_result_matches_model(result: str, model: str):
-    result_split = result.split()
-    model_split = model.split()
-    return all(map(lambda word: word in result_split, model_split))
+    def chunkify(text: str):
+        return text.replace('\'', '').replace('-', ' ').replace('\\', '').replace('/', ' ').lower().split()
 
+    result_split = chunkify(result)
+    model_split = chunkify(model)
+    return all(map(lambda word: word in result_split, model_split))

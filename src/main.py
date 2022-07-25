@@ -1,10 +1,10 @@
 import argparse
 import concurrent.futures
-import logging
+import os
 
 import config
-from config import search_terms
 from dbclient import DBClient
+from models import SearchManager
 from scrappers.blocket import BlocketScrapper
 from scrappers.kleinanziegen import KleinanzeigenScrapper
 from scrappers.marktplaats import MarktplaatsScrapper
@@ -21,10 +21,6 @@ page_scrappers_map = {
     'zikinf': ZikinfScrapper
 }
 supported_pages = ", ".join(page_scrappers_map.keys())
-
-format = "%(asctime)s: %(message)s"
-logging.basicConfig(format=format, level=logging.INFO,
-                    datefmt="%H:%M:%S")
 
 
 class MissingPageException(Exception):
@@ -48,13 +44,16 @@ group.add_argument("-w", "--website", action=SingleScrapAction, help="Key of the
 group.add_argument("--all", action='store_true', help="Flag to scrap all websites")
 args = parser.parse_args()
 
+brands_config_yaml_path = os.path.join(os.getcwd(), 'config', 'brands.yaml')
+search_manager = SearchManager(brands_config_yaml_path)
+
 
 def scrap_single_website(website_name):
     db_client = DBClient(config.DB_NAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
     scrapper.open_page()
-    for term in search_terms():
+    for term in search_manager.get_search_terms():
         scrapper.search_and_scrap(term)
         db_client.insert_items(scrapper.items)
         scrapper.clear_items()

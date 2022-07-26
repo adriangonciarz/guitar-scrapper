@@ -33,6 +33,9 @@ def test_item_currency_parsing(test_item: Item, expected_currency):
      'Telecaster Custom Shop'),
     (Item('Original Fender CS Strat 1994', '71 900 zł', 'http://www.ebay.com/item1234'), 'Fender',
      'Stratocaster Custom Shop'),
+    (Item("Fender Telecaster Custom '50s Limited Custom Shop", '4900 zł', 'http://www.ebay.com/item1234'), 'Fender',
+     'Telecaster Custom Shop'),
+    (Item("Fender Télécaster Custom Shop", '1650 €', 'http://www.ebay.com/item1234'), 'Fender', 'Telecaster Custom Shop')
 ])
 def test_item_brand_model_parsing(test_item: Item, expected_brand, expected_model):
     assert test_item.brand == expected_brand

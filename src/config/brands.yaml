@@ -28,6 +28,18 @@
     - name: Nocaster
       aliases: []
       search: true
+    - name: Stratocaster
+      aliases: [ strat ]
+      search: false
+    - name: Telecaster
+      aliases: [ tele ]
+      search: false
+    - name: Esquire
+      aliases: [ ]
+      search: false
+    - name: Thinline
+      aliases: [ ]
+      search: false
 - brand: Eastman
   brand_aliases: []
   models:
@@ -89,6 +101,9 @@
       aliases: [ silversky ]
       search: true
     - name: Mira
+      aliases: [ ]
+      search: false
+    - name: Tremonti
       aliases: [ ]
       search: true
 - brand: Suhr

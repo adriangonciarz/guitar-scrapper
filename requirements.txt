@@ -6,3 +6,4 @@ flask
 pyyaml
 pytest-xdist
 assertpy
+unidecode

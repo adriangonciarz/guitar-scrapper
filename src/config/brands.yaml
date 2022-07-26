@@ -56,18 +56,18 @@
   brand_aliases: [Paul Reed Smith]
   models:
     - name: Custom 24
-      aliases: [Custom24, CU 24, CU-24]
+      aliases: [Custom24, CU 24, CU-24, CU24]
       search: true
     - name: Custom 22
-      aliases: [Custom22, CU 22, CU-22]
+      aliases: [Custom22, CU 22, CU-22, CU22]
       search: false
-    - name: 408
+    - name: "408"
       aliases: []
       search: true
     - name: McCarty
-      aliases: [Mc Carty, 594]
+      aliases: [Mc Carty, "594", Mccarthy]
       search: true
-    - name: 513
+    - name: "513"
       aliases: [ ]
       search: true
     - name: Paul's Guitar
@@ -75,6 +75,21 @@
       search: true
     - name: DGT
       aliases: [ David Grissom ]
+      search: true
+    - name: Standard 24
+      aliases: [ Standard ]
+      search: false
+    - name: Santana
+      aliases: [ ]
+      search: false
+    - name: "245"
+      aliases: [SC 245]
+      search: false
+    - name: Silver Sky
+      aliases: [ silversky ]
+      search: true
+    - name: Mira
+      aliases: [ ]
       search: true
 - brand: Suhr
   brand_aliases: []

@@ -2,7 +2,7 @@ import argparse
 import concurrent.futures
 import os
 
-import config
+from config import config
 from dbclient import DBClient
 from models import BrandManager
 from scrappers.blocket import BlocketScrapper
@@ -57,7 +57,6 @@ def scrap_single_website(website_name):
         scrapper.search_and_scrap(term)
         db_client.insert_items(scrapper.items)
         scrapper.clear_items()
-    # scrapper.dump_items_data_as_csv(f'{scrapper_class.__name__}.csv')
     scrapper.quit_page()
 
 

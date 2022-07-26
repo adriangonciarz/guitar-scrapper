@@ -29,7 +29,7 @@ def test_item_currency_parsing(test_item: Item, expected_currency):
     (Item('PRS Custom 24 2003 Blood Orange', '1.870 €', 'http://www.ebay.com/item1234'), 'PRS', 'Custom 24'),
     (Item('PRS CU24 2010 Green', '€ 2.429,00', 'http://www.ebay.com/item12345'), 'PRS', 'Custom 24'),
     (Item('Xotic XTC-1', 'SEK 22,900', 'http://www.ebay.com/item124434'), 'Xotic', 'XTC'),
-    (Item('Brand new Fender Telecaster 52 US 1993', '1650 €', 'http://www.ebay.com/item1234'), 'PRS',
+    (Item('Brand new Fender Telecaster CS US 1993', '1650 €', 'http://www.ebay.com/item1234'), 'Fender',
      'Telecaster Custom Shop'),
     (Item('Original Fender CS Strat 1994', '71 900 zł', 'http://www.ebay.com/item1234'), 'Fender',
      'Stratocaster Custom Shop'),

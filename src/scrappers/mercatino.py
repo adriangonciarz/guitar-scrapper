@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-import config
+from config import config
 from scrappers.base import BaseScrapper
 
 

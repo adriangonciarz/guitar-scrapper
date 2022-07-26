@@ -3,9 +3,9 @@ import os
 import pytest
 from assertpy import assert_that
 
-from config.config import BrandManager
+from models import BrandManager
 
-test_config_filepath = os.path.join(os.getcwd(), 'test_brand_config.yaml')
+test_config_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'test_brand_config.yaml')
 
 
 def test_loading_config():

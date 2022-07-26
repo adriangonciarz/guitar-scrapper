@@ -1,6 +1,6 @@
 import pytest
 
-from utils import sanitize_string_for_csv, unify_item_name, sanitize_string_for_database, check_if_result_matches_substring
+from utils import sanitize_string_for_csv, sanitize_string_for_database, check_if_result_matches_substring
 
 
 def test_sanitzing_string_for_csv():
@@ -11,11 +11,6 @@ def test_sanitzing_string_for_csv():
 def test_sanitizing_string_for_database():
     test_string = "Paul's guitar"
     assert sanitize_string_for_database(test_string) == "Paul''s guitar"
-
-
-def test_cleanup_name():
-    test_name = 'Eastman SB-57/V'
-    assert unify_item_name(test_name) == 'eastmansb57v'
 
 
 @pytest.mark.parametrize(

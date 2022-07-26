@@ -35,7 +35,8 @@ def test_item_currency_parsing(test_item: Item, expected_currency):
      'Stratocaster Custom Shop'),
     (Item("Fender Telecaster Custom '50s Limited Custom Shop", '4900 zł', 'http://www.ebay.com/item1234'), 'Fender',
      'Telecaster Custom Shop'),
-    (Item("Fender Télécaster Custom Shop", '1650 €', 'http://www.ebay.com/item1234'), 'Fender', 'Telecaster Custom Shop')
+    (Item("Fender Télécaster Custom Shop", '1650 €', 'http://www.ebay.com/item1234'), 'Fender', 'Telecaster Custom Shop'),
+    (Item("Todd Krause Fender masterbuilt relic ´55 ltd edition Stratocaster", '1650 €', 'http://www.ebay.com/item1234'), 'Fender', 'Stratocaster Masterbuilt')
 ])
 def test_item_brand_model_parsing(test_item: Item, expected_brand, expected_model):
     assert test_item.brand == expected_brand

@@ -7,7 +7,7 @@ blocket_basepath = 'https://www.blocket.se/annonser/hela_sverige/fritid_hobby/mu
 marktplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaarinstrumenten-gitaren-elektrisch/'
 zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 
-headless = False
+headless = True
 MAX_PARALLEL_SCRAPPERS = 3
 DB_HOST = os.getenv('DBHOST')
 DB_PORT = os.getenv('DBPORT', 3306)

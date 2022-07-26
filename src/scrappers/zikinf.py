@@ -1,7 +1,6 @@
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
-import config
+from config import config
 from scrappers.base import BaseScrapper
 
 
@@ -17,9 +16,3 @@ class ZikinfScrapper(BaseScrapper):
 
     def __init__(self):
         super().__init__(config.zikinf_basepath)
-
-    # def clear_input(self):
-    #     try:
-    #         self.driver.find_element(*self.clear_input_button).click()
-    #     except NoSuchElementException:
-    #         pass

@@ -1,9 +1,8 @@
 import base64
-import sqlite3
 import uuid
 from sqlite3 import Error
 
-import config
+from config import config
 from utils import sanitize_string_for_database
 from models import Item
 import mysql.connector

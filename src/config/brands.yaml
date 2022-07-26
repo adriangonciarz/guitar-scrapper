@@ -1,0 +1,204 @@
+- brand: Music Man
+  brand_aliases: [MM, MusicMan, musicman, EBMM, Ernie Ball]
+  models:
+    - name: Axis
+      aliases: []
+      search: true
+    - name: Luke
+      aliases: [Lukather]
+      search: true
+    - name: Cutlass
+      aliases: []
+      search: false
+- brand: Gibson
+  brand_aliases: []
+  models:
+    - name: Les Paul
+      aliases: [LP, Lespaul]
+      search: false
+- brand: Schecter
+  brand_aliases: []
+  models:
+    - name: Nick Johnston
+      aliases: [Nick Johnson]
+      search: false
+- brand: Fender
+  brand_aliases: []
+  models:
+    - name: Stratocaster Custom Shop
+      aliases: [Stratocaster CS, Strat CS, Strat Custom Shop]
+      search: true
+    - name: Telecaster Custom Shop
+      aliases: [ Telecaster CS, Tele CS, Tele Custom Shop ]
+      search: true
+    - name: Telecaster Masterbuilt
+      aliases: [ Telecaster masterbuild, Tele masterbuild, Tele masterbuilt ]
+      search: true
+    - name: Stratocaster Masterbuilt
+      aliases: [ Stratocaster masterbuild, Strat masterbuild, Strat masterbuilt ]
+      search: true
+    - name: Masterbuilt
+      aliases: [John Cruz, Dale Wilson, Paul Waller, Jason Smith, Todd Krause, masterbuild]
+      search: false
+    - name: Nocaster
+      aliases: []
+      search: true
+    - name: Stratocaster
+      aliases: [ strat ]
+      search: false
+    - name: Telecaster
+      aliases: [ tele ]
+      search: false
+    - name: Esquire
+      aliases: [ ]
+      search: false
+    - name: Thinline
+      aliases: [ ]
+      search: false
+- brand: Eastman
+  brand_aliases: []
+  models:
+    - name: SB55
+      aliases: [SB-55]
+      search: false
+    - name: SB57
+      aliases: [SB-57]
+      search: false
+    - name: SB59
+      aliases: [SB-59]
+      search: true
+- brand: Maybach
+  brand_aliases: []
+  models:
+    - name: Teleman
+      aliases: [Red Rooster]
+      search: true
+    - name: Capitol
+      aliases: []
+      search: true
+    - name: Lester
+      aliases: []
+      search: true
+- brand: PRS
+  brand_aliases: [Paul Reed Smith]
+  models:
+    - name: Custom 24
+      aliases: [Custom24, CU 24, CU-24, CU24]
+      search: true
+    - name: Custom 22
+      aliases: [Custom22, CU 22, CU-22, CU22]
+      search: false
+    - name: "408"
+      aliases: []
+      search: true
+    - name: McCarty
+      aliases: [Mc Carty, "594", Mccarthy]
+      search: true
+    - name: "513"
+      aliases: [ ]
+      search: true
+    - name: Paul's Guitar
+      aliases: [ Pauls Guitar]
+      search: true
+    - name: DGT
+      aliases: [ David Grissom ]
+      search: true
+    - name: Standard 24
+      aliases: [ Standard ]
+      search: false
+    - name: Santana
+      aliases: [ ]
+      search: false
+    - name: "245"
+      aliases: [SC 245]
+      search: false
+    - name: Silver Sky
+      aliases: [ silversky ]
+      search: true
+    - name: Mira
+      aliases: [ ]
+      search: false
+    - name: Tremonti
+      aliases: [ ]
+      search: true
+- brand: Suhr
+  brand_aliases: []
+  models:
+    - name: Modern
+      aliases: []
+      search: true
+    - name: Scott Henderson
+      aliases: []
+      search: false
+    - name: Classic
+      aliases: []
+      search: false
+- brand: Tom Anderson
+  brand_aliases: []
+  models:
+    - name: Drop Top
+      aliases: [Droptop, Drop-Top]
+      search: true
+    - name: Angel
+      aliases: []
+      search: true
+    - name: Classic
+      aliases: []
+      search: false
+- brand: Nik Huber
+  brand_aliases: [Huber]
+  models:
+    - name: Orca
+      aliases: []
+      search: false
+    - name: Dolphin
+      aliases: []
+      search: false
+    - name: Krautster
+      aliases: []
+      search: true
+- brand: Parker
+  brand_aliases: []
+  models:
+    - name: Fly
+      aliases: []
+      search: true
+    - name: Nite Fly
+      aliases: [Nitefly]
+      search: false
+- brand: James Tyler
+  brand_aliases: [Tyler]
+  models:
+    - name: Studio Elite
+      aliases: [Studio]
+      search: true
+    - name: Classic
+      aliases: []
+      search: true
+    - name: Burning Water
+      aliases: []
+      search: true
+- brand: Xotic
+  brand_aliases: []
+  models:
+    - name: XSC
+      aliases: []
+      search: true
+    - name: XTC
+      aliases: [ ]
+      search: true
+- brand: Valley Arts
+  brand_aliases: [ValleyArts]
+  models:
+    - name: California Pro
+      aliases: []
+      search: false
+    - name: Custom
+      aliases: [ ]
+      search: false
+- brand: Kelton Swade
+  brand_aliases: []
+  models:
+    - name: AVRT
+      aliases: []
+      search: true

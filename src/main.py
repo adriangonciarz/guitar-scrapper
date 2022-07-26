@@ -41,7 +41,7 @@ class SingleScrapAction(argparse.Action):
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
 group.add_argument("-w", "--website", action=SingleScrapAction, help="Key of the website to scrap")
-group.add_argument("--all", action='store_true', help="Flag to scrap all websites")
+group.add_argument("-a", "--all", action='store_true', help="Flag to scrap all websites")
 args = parser.parse_args()
 
 brands_config_yaml_path = os.path.join(os.getcwd(), 'config', 'brands.yaml')

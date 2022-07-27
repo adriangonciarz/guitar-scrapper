@@ -33,7 +33,7 @@ class BaseScrapper:
     link_selector = None
     cookies_accept_selector = None
     empty_results_selector = None
-    url_id_pattern = None
+    wait_after_search = 1
 
     def __init__(self, base_path):
         self.base_path = base_path
@@ -87,25 +87,28 @@ class BaseScrapper:
     def search_for_term(self, query):
         search_input = self.driver.find_element(*self.input_selector)
         search_input.send_keys(query + Keys.ENTER)
-        sleep(3)
+        sleep(self.wait_after_search)
 
     def parse_result_container(self, container: WebElement) -> Item:
         title_element = container.find_element(*self.title_selector)
         link_element = container.find_element(*self.link_selector)
         name = title_element.text
         link = link_element.get_attribute('href')
-        price = container.find_element(*self.price_selector).text
+        price = self._get_container_price(container)
         return Item(name, price, link)
+
+    def _get_container_price(self, container: WebElement):
+        try:
+            return container.find_element(*self.price_selector).text
+        except:
+            return ''
 
     def scrap_page(self) -> [Item]:
         item_containers = self.driver.find_elements(*self.result_container_selector)
         for cont in item_containers:
-            try:
-                item = self.parse_result_container(cont)
-                self.add_item(item)
-                print(f'Item {item.name} done')
-            except:
-                print('scrapping element failed')
+            item = self.parse_result_container(cont)
+            self.add_item(item)
+            print(f'Item {item.name} done')
 
     def is_results_empty(self):
         if self.empty_results_selector:

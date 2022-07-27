@@ -12,7 +12,7 @@ class KleinanzeigenScrapper(BaseScrapper):
     link_selector = title_selector
     cookies_accept_selector = (By.ID, 'gdpr-banner-accept')
     empty_results_selector = (By.CSS_SELECTOR, "div.outcomemessage-warning")
-    url_id_pattern = '\/([0-9-]+)'
+    wait_after_search = 3
 
     def __init__(self):
         super().__init__(config.kleinanziegen_basepath)

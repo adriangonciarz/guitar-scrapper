@@ -6,6 +6,7 @@ from config import config
 from dbclient import DBClient
 from models import BrandManager
 from scrappers.blocket import BlocketScrapper
+from scrappers.guitarristas import GuitarristasScrapper
 from scrappers.kleinanziegen import KleinanzeigenScrapper
 from scrappers.marktplaats import MarktplaatsScrapper
 from scrappers.mercatino import MercatinoScrapper
@@ -18,7 +19,8 @@ page_scrappers_map = {
     'marktplaats': MarktplaatsScrapper,
     'mercatino': MercatinoScrapper,
     'kleinanziegen': KleinanzeigenScrapper,
-    'zikinf': ZikinfScrapper
+    'zikinf': ZikinfScrapper,
+    'guitarristas': GuitarristasScrapper,
 }
 supported_pages = ", ".join(page_scrappers_map.keys())
 

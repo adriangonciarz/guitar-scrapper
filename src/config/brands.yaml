@@ -25,6 +25,9 @@
 - brand: Fender
   brand_aliases: []
   models:
+    - name: Landau, Stratocaster
+      aliases: [Landau]
+      search: true
     - name: Stratocaster Custom Shop
       aliases: [Stratocaster CS, Strat CS, Strat Custom Shop]
       search: true

@@ -6,8 +6,9 @@ mercatino_basepath = 'https://www.mercatinomusicale.com/'
 blocket_basepath = 'https://www.blocket.se/annonser/hela_sverige/fritid_hobby/musikutrustning/gitarr_bas_forstarkare?cg=6161'
 marktplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaarinstrumenten-gitaren-elektrisch/'
 zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
+guitarristas_basepath = 'https://www.guitarristas.info/anuncios/guitarras-bajos'
 
-headless = True
+headless = False
 MAX_PARALLEL_SCRAPPERS = 3
 DB_HOST = os.getenv('DBHOST')
 DB_PORT = os.getenv('DBPORT', 3306)

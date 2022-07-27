@@ -12,7 +12,6 @@ class ZikinfScrapper(BaseScrapper):
     link_selector = (By.CSS_SELECTOR, "td.titre a")
     empty_results_selector = (By.XPATH, '//strong[contains(text(), "Il n’y a pas d’annonce correspondant à votre recherche")]')
     clear_input_button = (By.XPATH, '//button[contains(@class, "SearchInput__StyledClearButton")]')
-    url_id_pattern = '\d+'
 
     def __init__(self):
         super().__init__(config.zikinf_basepath)

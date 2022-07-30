@@ -52,7 +52,7 @@ class BaseScrapper:
         self.driver = prepare_driver()
         self.driver.get(self.base_path)
         if self.cookies_accept_selector:
-            sleep(1)
+            sleep(2)
             self.driver.find_element(*self.cookies_accept_selector).click()
 
     def add_item(self, item: Item):

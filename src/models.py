@@ -1,5 +1,6 @@
 import dataclasses
 import re
+import random
 from typing import Optional
 
 import yaml
@@ -47,6 +48,7 @@ class BrandManager:
             for model in brand.models:
                 if model.search:
                     terms.append(f'{brand.name} {model.name}'.lower())
+        random.shuffle(terms)
         return terms
 
     def get_brand_by_name(self, brand_name: str) -> Brand:

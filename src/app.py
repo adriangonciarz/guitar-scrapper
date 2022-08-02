@@ -24,8 +24,12 @@ def all_items():
 def brand_items():
     args = request.args
     name = args.get('name')
+    model = args.get('model')
     db_client = DBClient(DB_NAME)
-    data = db_client.fetch_brand_items(name)
+    if model:
+        data = db_client.fetch_brand_model_items(name, model)
+    else:
+        data = db_client.fetch_brand_items(name)
     return render_template('item_list.html', data=data)
 
 

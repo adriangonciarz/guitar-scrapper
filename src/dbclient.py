@@ -68,6 +68,11 @@ class DBClient:
         c.execute(f"SELECT * FROM items WHERE brand='{brand_name}' ORDER BY last_updated DESC")
         return c.fetchall()
 
+    def fetch_brand_model_items(self, brand_name, model_name):
+        c = self.conn.cursor()
+        c.execute(f"SELECT * FROM items WHERE brand='{brand_name}' AND model='{model_name}' ORDER BY last_updated DESC")
+        return c.fetchall()
+
     def create_database(self, db_name):
         self.conn.cursor().execute(f"CREATE DATABASE {db_name}")
 

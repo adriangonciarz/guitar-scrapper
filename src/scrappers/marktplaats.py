@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -19,7 +21,7 @@ class MarktplaatsScrapper(BaseScrapper):
         super().__init__(config.marktplaats_basepath)
 
     def clear_input(self):
-        current_query = self.driver.find_element(*self.input_selector).get_attribute('value')
-        self.driver.find_element(*self.input_selector).click()
-        for _ in range(len(current_query)):
-            self.driver.find_element(*self.input_selector).send_keys(Keys.BACKSPACE)
+        input_element = self.driver.find_element(*self.input_selector)
+        input_element.click()
+        input_element.send_keys(Keys.COMMAND + 'A')
+        input_element.send_keys(Keys.BACKSPACE)

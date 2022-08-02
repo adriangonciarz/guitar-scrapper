@@ -51,6 +51,7 @@ search_manager = BrandManager(brands_config_yaml_path)
 
 
 def scrap_single_website(website_name):
+    print(f'Starting the scrapping of {website_name}')
     db_client = DBClient(config.DB_NAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
@@ -60,6 +61,7 @@ def scrap_single_website(website_name):
         db_client.insert_items(scrapper.items)
         scrapper.clear_items()
     scrapper.quit_page()
+    print(f'Scrapping of {website_name} ended')
 
 
 def scrap_all_websites():

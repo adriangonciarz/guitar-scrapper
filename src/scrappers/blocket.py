@@ -14,6 +14,7 @@ class BlocketScrapper(BaseScrapper):
     cookies_accept_selector = (By.ID, 'accept-ufti')
     empty_results_selector = (By.XPATH, '//div[contains(@class, "EmptyState__Container")]')
     clear_input_button = (By.XPATH, '//button[contains(@class, "SearchInput__StyledClearButton")]')
+    wait_after_search = 1.5
 
     def __init__(self):
         super().__init__(config.blocket_basepath)

@@ -5,7 +5,7 @@ from scrappers.base import BaseScrapper
 
 
 class OLXScrapper(BaseScrapper):
-    input_selector = (By.ID, 'search-text')
+    input_selector = (By.ID, 'search')
     result_container_selector = (By.CSS_SELECTOR, 'div.offer-wrapper')
     title_selector = (By.CSS_SELECTOR, 'a[data-cy="listing-ad-title"]')
     price_selector = (By.CSS_SELECTOR, 'p.price')

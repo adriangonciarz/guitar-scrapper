@@ -124,6 +124,9 @@
     - name: Tremonti
       aliases: [ ]
       search: true
+    - name: Navarro
+      aliases: [ ]
+      search: true
 - brand: Suhr
   brand_aliases: []
   models:

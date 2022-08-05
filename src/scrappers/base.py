@@ -22,6 +22,9 @@ def prepare_driver() -> webdriver.Chrome:
     options.add_argument("--disable-infobars")
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.maximize_window()
+    driver.implicitly_wait(5)
+    driver.set_page_load_timeout(5)
+    driver.set_script_timeout(5)
     return driver
 
 

@@ -8,7 +8,7 @@ marktplaats_basepath = 'https://www.marktplaats.nl/l/muziek-en-instrumenten/snaa
 zikinf_basepath = 'https://www.zikinf.com/annonces/liste.php?rub=9'
 guitarristas_basepath = 'https://www.guitarristas.info/anuncios/guitarras-bajos'
 
-headless = False
+headless = True
 MAX_PARALLEL_SCRAPPERS = 3
 DB_HOST = os.getenv('DBHOST')
 DB_PORT = os.getenv('DBPORT', 3306)

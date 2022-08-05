@@ -14,6 +14,7 @@ class OLXScrapper(BaseScrapper):
     cookies_accept_selector = (By.CSS_SELECTOR, 'button#onetrust-accept-btn-handler')
     empty_results_selector = (By.XPATH, "//p[contains(text(), 'Nie znaleźliśmy żadnych wyników')]")
     clear_input_button_selector = (By.XPATH, '//button[@data-testid="clear-btn"]')
+    wait_after_search = 3
 
     def __init__(self):
         super().__init__(config.olx_basepath)

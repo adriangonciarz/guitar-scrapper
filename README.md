@@ -1,11 +1,19 @@
 ### Usage
-To run scrap on page, provide parameter `--w` with value from: `blocket, olx, mercatino, kleinanziegen, markplaats` 
+To run scrap on page, provide parameter `--website` with value from: 
+- blocket, 
+- olx, 
+- mercatino, 
+- kleinanziegen, 
+- markplaats`,
+- zikinf,
+- guitarristas
+
 ```shell 
-python3 main.py --w blocket
+python3 main.py --website blocket
 ```
 or `--a` for all websites
 ```shell
-python3 main.py --a
+python3 main.py --all
 ```
 Create a database
 ```shell

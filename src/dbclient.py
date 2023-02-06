@@ -43,10 +43,10 @@ class DBClient:
             item.link,
             sanitize_string_for_database(item.brand) if item.brand else None,
             sanitize_string_for_database(item.model) if item.model else None,
-            item.price,
+            0 if item.price == None else item.price,
             item.currency
         )
-        print(insert_query)
+        log.debug(insert_query)
         self.__execute_sql(insert_query)
         if autocommit:
             self.__commit()
@@ -89,14 +89,13 @@ class DBClient:
             c = self.conn.cursor()
             c.execute(sql_string)
         except Error as e:
-            print(e)
+            log.error(f'{e}')
 
     def __commit(self):
         self.conn.commit()
 
 
 class NewDatabase(DBClient):
-
     def __create_connection(self):
         """ create a database connection to a MySQL database """
         try:
@@ -104,7 +103,6 @@ class NewDatabase(DBClient):
                 host=config.DB_HOST,
                 user=config.DB_USER,
                 password=config.DB_PASSWORD,
-
             )
             log.info('DB Connection successful')
         except Error as err:
@@ -116,3 +114,4 @@ class NewDatabase(DBClient):
             log.info("Database created")
         except Error as err:
             log.error(f"{err}")
+            exit(1)

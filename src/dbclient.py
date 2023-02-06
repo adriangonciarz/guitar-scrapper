@@ -1,6 +1,9 @@
 import base64
 import uuid
+import logging as log
 from sqlite3 import Error
+
+from mysql.connector import errorcode, Error
 
 from config import config
 from utils import sanitize_string_for_database
@@ -68,11 +71,8 @@ class DBClient:
         c.execute(f"SELECT * FROM items WHERE brand='{brand_name}' ORDER BY last_updated DESC")
         return c.fetchall()
 
-    def create_database(self, db_name):
-        self.conn.cursor().execute(f"CREATE DATABASE {db_name}")
-
     def __create_connection(self):
-        """ create a database connection to a SQLite database """
+        """ create a database connection to a MySQL database """
         try:
             self.conn = mysql.connector.connect(
                 host=config.DB_HOST,
@@ -80,9 +80,9 @@ class DBClient:
                 password=config.DB_PASSWORD,
                 database=self.db_name
             )
-            print('DB Connection successful')
-        except Error as e:
-            print(e)
+            log.info('DB Connection successful')
+        except Error as err:
+            log.error(f"{err}")
 
     def __execute_sql(self, sql_string):
         try:
@@ -93,3 +93,26 @@ class DBClient:
 
     def __commit(self):
         self.conn.commit()
+
+
+class NewDatabase(DBClient):
+
+    def __create_connection(self):
+        """ create a database connection to a MySQL database """
+        try:
+            self.conn = mysql.connector.connect(
+                host=config.DB_HOST,
+                user=config.DB_USER,
+                password=config.DB_PASSWORD,
+
+            )
+            log.info('DB Connection successful')
+        except Error as err:
+            log.error(f"{err}")
+
+    def create_database(self, db_name):
+        try:
+            self.conn.cursor().execute(f"CREATE DATABASE {db_name}")
+            log.info("Database created")
+        except Error as err:
+            log.error(f"{err}")

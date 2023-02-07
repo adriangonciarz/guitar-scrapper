@@ -54,6 +54,7 @@ search_manager = BrandManager(brands_config_yaml_path)
 
 
 def scrap_single_website(website_name):
+    logging.info(f'Scrapping single website {website_name}')
     db_client = DBClient(config.DB_NAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
@@ -66,7 +67,7 @@ def scrap_single_website(website_name):
 
 
 def scrap_all_websites():
-    print('Scrapping all websites')
+    logging.info('Scrapping all websites')
     with concurrent.futures.ThreadPoolExecutor(max_workers=config.MAX_PARALLEL_SCRAPPERS) as executor:
         executor.map(scrap_single_website, page_scrappers_map.keys())
 
@@ -77,6 +78,7 @@ if __name__ == '__main__':
     if args.create_database:
         NewDatabase().create_database(config.DB_NAME)
         DBClient(config.DB_NAME).create_items_table()
+        exit(0)
     if args.all:
         scrap_all_websites()
     else:

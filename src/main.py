@@ -1,9 +1,10 @@
 import argparse
 import concurrent.futures
+import logging
 import os
 
 from config import config
-from dbclient import DBClient
+from dbclient import DBClient, NewDatabase
 from models import BrandManager
 from scrappers.blocket import BlocketScrapper
 from scrappers.guitarristas import GuitarristasScrapper
@@ -42,8 +43,10 @@ class SingleScrapAction(argparse.Action):
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
-group.add_argument("-w", "--website", action=SingleScrapAction, help="Key of the website to scrap")
+group.add_argument("-w", "--website", default='olx', action=SingleScrapAction, help="Key of the website to scrap")
 group.add_argument("-a", "--all", action='store_true', help="Flag to scrap all websites")
+parser.add_argument("--create-database", action='store_true', help="Create database")
+parser.add_argument("--log-level", default="info", help="Set log level to debug")
 args = parser.parse_args()
 
 brands_config_yaml_path = os.path.join(os.getcwd(), 'config', 'brands.yaml')
@@ -51,6 +54,7 @@ search_manager = BrandManager(brands_config_yaml_path)
 
 
 def scrap_single_website(website_name):
+    logging.info(f'Scrapping single website {website_name}')
     db_client = DBClient(config.DB_NAME)
     scrapper_class = page_scrappers_map[website_name]
     scrapper = scrapper_class()
@@ -63,13 +67,18 @@ def scrap_single_website(website_name):
 
 
 def scrap_all_websites():
-    print('Scrapping all websites')
+    logging.info('Scrapping all websites')
     with concurrent.futures.ThreadPoolExecutor(max_workers=config.MAX_PARALLEL_SCRAPPERS) as executor:
         executor.map(scrap_single_website, page_scrappers_map.keys())
 
 
 if __name__ == '__main__':
-    # db_client = DBClient(config.DB_NAME).create_items_table()
+    if args.log_level:
+        logging.basicConfig(level=args.log_level.upper())
+
+    if args.create_database:
+        NewDatabase().create_database(config.DB_NAME)
+        exit(0)
     if args.all:
         scrap_all_websites()
     else:

@@ -13,6 +13,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from config import config
 from models import Item
 from utils import sanitize_string_for_csv
+import logging as log
 
 
 def prepare_driver() -> webdriver.Chrome:
@@ -108,7 +109,7 @@ class BaseScrapper:
         for cont in item_containers:
             item = self.parse_result_container(cont)
             self.add_item(item)
-            print(f'Item {item.name} done')
+            log.info(f'Item {item.name} done')
 
     def is_results_empty(self):
         if self.empty_results_selector:

@@ -46,7 +46,7 @@ group = parser.add_mutually_exclusive_group()
 group.add_argument("-w", "--website", default='olx', action=SingleScrapAction, help="Key of the website to scrap")
 group.add_argument("-a", "--all", action='store_true', help="Flag to scrap all websites")
 parser.add_argument("--create-database", action='store_true', help="Create database")
-parser.add_argument("--log-level", help="Set log level to debug")
+parser.add_argument("--log-level", default="info", help="Set log level to debug")
 args = parser.parse_args()
 
 brands_config_yaml_path = os.path.join(os.getcwd(), 'config', 'brands.yaml')
@@ -75,9 +75,9 @@ def scrap_all_websites():
 if __name__ == '__main__':
     if args.log_level:
         logging.basicConfig(level=args.log_level.upper())
+
     if args.create_database:
         NewDatabase().create_database(config.DB_NAME)
-        DBClient(config.DB_NAME).create_items_table()
         exit(0)
     if args.all:
         scrap_all_websites()

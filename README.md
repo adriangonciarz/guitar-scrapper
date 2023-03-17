@@ -19,6 +19,9 @@ Create a database
 ```shell
 python3 main.py --create-database
 ```
+mode is used only for a purpose of db schema creation
+
+
 Logging levels:
 - debug
 - info

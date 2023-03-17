@@ -3,7 +3,7 @@ import uuid
 import logging as log
 from sqlite3 import Error
 
-from mysql.connector import errorcode, Error
+from mysql.connector import errorcode, Error, DatabaseError, InterfaceError, ProgrammingError
 
 from config import config
 from utils import sanitize_string_for_database
@@ -43,7 +43,7 @@ class DBClient:
             item.link,
             sanitize_string_for_database(item.brand) if item.brand else None,
             sanitize_string_for_database(item.model) if item.model else None,
-            0 if item.price == None else item.price,
+            item.price or 0,
             item.currency
         )
         log.debug(insert_query)
@@ -80,7 +80,7 @@ class DBClient:
                 password=config.DB_PASSWORD,
                 database=self.db_name
             )
-            log.info('DB Connection successful')
+            log.info(f'DB "{self.db_name}" connection successful')
         except Error as err:
             log.error(f"{err}")
 
@@ -95,7 +95,11 @@ class DBClient:
         self.conn.commit()
 
 
-class NewDatabase(DBClient):
+class NewDatabase:
+    def __init__(self):
+        self.conn = None
+        self.__create_connection()
+
     def __create_connection(self):
         """ create a database connection to a MySQL database """
         try:
@@ -104,14 +108,16 @@ class NewDatabase(DBClient):
                 user=config.DB_USER,
                 password=config.DB_PASSWORD,
             )
-            log.info('DB Connection successful')
-        except Error as err:
-            log.error(f"{err}")
+            log.info('MySQL connection successful')
+        except (InterfaceError, ProgrammingError) as err:
+            log.error(err)
+            exit(1)
 
     def create_database(self, db_name):
         try:
             self.conn.cursor().execute(f"CREATE DATABASE {db_name}")
+            DBClient(db_name).create_items_table()
             log.info("Database created")
-        except Error as err:
-            log.error(f"{err}")
+        except DatabaseError as err:
+            log.error(err)
             exit(1)

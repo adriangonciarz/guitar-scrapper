@@ -20,7 +20,7 @@ def prepare_driver() -> webdriver.Chrome:
     options.headless = config.headless
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-infobars")
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     return driver
 

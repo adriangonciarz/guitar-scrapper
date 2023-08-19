@@ -81,7 +81,7 @@ class Item:
         if price_group := re.search('(\d+.\d+),(\d+)', self.price_string):
             return int(price_group.group(1).replace('.', ''))
         price_extracted = ''.join(re.findall('[0-9]+', self.price_string))
-        return int(price_extracted) if price_extracted else None
+        return int(price_extracted) if price_extracted else 0
 
     @property
     def currency(self):

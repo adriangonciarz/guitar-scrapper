@@ -69,7 +69,7 @@ def scrap_all_websites():
 
 
 if __name__ == '__main__':
-    # db_client = DBClient(config.DB_NAME).create_items_table()
+    db_client = DBClient(config.DB_NAME).create_items_table()
     if args.all:
         scrap_all_websites()
     else:

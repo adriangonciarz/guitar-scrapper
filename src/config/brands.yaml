@@ -190,15 +190,15 @@
 #    - name: XTC
 #      aliases: [ ]
 #      search: true
-#- brand: Valley Arts
-#  brand_aliases: [ValleyArts]
-#  models:
-#    - name: California Pro
-#      aliases: []
-#      search: false
-#    - name: Custom
-#      aliases: [ ]
-#      search: false
+- brand: Haar
+  brand_aliases: []
+  models:
+    - name: Trad S
+      aliases: []
+      search: true
+    - name: Trad S
+      aliases: [ ]
+      search: true
 - brand: Novo
   brand_aliases: []
   models:
